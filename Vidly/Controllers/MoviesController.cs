@@ -14,18 +14,18 @@ namespace Vidly.Controllers
         //Возращаемый тип метода может быть ViewResult проще при Юнит тестах
         public ActionResult Random()
         {
-            var movie = new Movie() { Name = "Shrek!" };
-
-            var customers = new List<Customer>
+          
+            var movies = new List<Movie>
             {
-                new Customer {Name = "Vitas"},
-                new Customer {Name = "Oleg"}
+              new Movie{Id=1,Name="Sherk"},
+              new Movie{Id=2,Name="Harry Poter"},
+              new Movie{Id=3,Name="Avengers"}
             };
 
             var viewModel = new RandomMovieViewModel
             {
-                Movie = movie,
-                Customers = customers
+                Movies = movies
+                
             };
             
             //return RedirectToAction("Index","Home", new { page = 1, sortBy = "name" });
@@ -41,10 +41,6 @@ namespace Vidly.Controllers
             return Content("id="+id);
         }
 
-        public ActionResult Film(string name)
-        {
-            return Content("Name=" + name);
-        }
         //movies метод с необязательными параметрами (нужно чтобы переменные были NUll 
         //стриинг без значения по учмолчанию равен NUll
         public ActionResult Index(int? pageIndex , string sortBy)

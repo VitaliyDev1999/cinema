@@ -8,23 +8,21 @@
    Comments    
 *@
 
-@{ 
-    var className = Model.Customers.Count > 0 ? "popular" : null;
-}
-
-<h2 class="@className">@Model.Movie.Name</h2>
-
-@if (Model.Customers.Count == 0)
-{
-    <text>No one has rented this movie before.</text>
-}
-else
-{
-<ul>
-@foreach (var customer in Model.Customers)
-{
-    <li>@customer.Name</li>
-}
-</ul>
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <th scope="row">@movie.Id</th>
+                <td><a href="Customers/Details/@movie.Id">@movie.Name</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
         
