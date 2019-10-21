@@ -8,44 +8,32 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
-    public class CustomersController:Controller
+    public class CustomersController : Controller
     {
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            var customers = new List<Customer>
-            {
-                new Customer{Id=1, Name="mary jane"},
-                new Customer{Id=2, Name="alex crab"},
-                new Customer{Id=3, Name="martin scorceze"}
-            };
+            var customers = GetCustomers();
 
-            var viewModel = new CustomerViewModel
-            {
-                Customers = customers
-            };
-
-            return View(viewModel);
+            return View(customers);
         }
 
-        public ActionResult Profile(int id)
+        public ActionResult Details(int id)
         {
-            var customers = new List<Customer>
+            var customer = GetCustomers().SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            return View(customer);
+        }
+
+        private IEnumerable<Customer> GetCustomers()
+        {
+            return new List<Customer>
             {
-                new Customer{Id=1, Name="mary jane"},
-                new Customer{Id=2, Name="alex crab"},
-                new Customer{Id=3, Name="martin scorceze"}
+                new Customer { Id = 1, Name = "John Smith" },
+                new Customer { Id = 2, Name = "Mary Williams" }
             };
-
-            foreach(var customer in customers)
-            {
-                if (customer.Id == id)
-                {
-                    var data = customer;
-                    return View(customer);
-                }
-            }
-
-            return HttpNotFound();
         }
     }
 }

@@ -15,12 +15,12 @@ namespace Vidly
 
             routes.MapMvcAttributeRoutes();
             //кастомный роут
-            routes.MapRoute
-            (
-                name:"MoviesByDate",
-                url:"movies/released/{entrydate}",
-                defaults: new { controller = "Movies" , action = "Entry"}
-            );
+            //routes.MapRoute
+            //(
+            //    name:"MoviesByDate",
+            //    url:"movies/released/{entrydate}",
+            //    defaults: new { controller = "Movies" , action = "Entry"}
+            //);
 
             //routes.MapRoute
             //(
