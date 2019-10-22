@@ -199,6 +199,10 @@
     <Compile Include="Migrations\201910221752347_AddMovieTypeModel.Designer.cs">
       <DependentUpon>201910221752347_AddMovieTypeModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910221853494_PopulateMovieTypes.cs" />
+    <Compile Include="Migrations\201910221853494_PopulateMovieTypes.Designer.cs">
+      <DependentUpon>201910221853494_PopulateMovieTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910221752347_AddMovieTypeModel.resx">
       <DependentUpon>201910221752347_AddMovieTypeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221853494_PopulateMovieTypes.resx">
+      <DependentUpon>201910221853494_PopulateMovieTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
