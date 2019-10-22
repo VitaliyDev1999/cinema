@@ -10,6 +10,13 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
+
+        private ApplicationDbContext _context; //инициализируется в конструкторе
+        public CustomersController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
         public ViewResult Index()
         {
             var customers = GetCustomers();
