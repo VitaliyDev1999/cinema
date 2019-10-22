@@ -8,14 +8,18 @@
     <thead>
         <tr>
             <th>Movie</th>
+            <th>Country</th>
+            <th>Raiting</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var movie in Model)
         {
-            <tr>
-                <td>@movie.Name</td>
-            </tr>
+        <tr>
+            <td>@movie.Name</td>
+            <td>@movie.Country</td>
+            <td>@movie.Rainting</td>
+        </tr>
         }
     </tbody>
 </table>

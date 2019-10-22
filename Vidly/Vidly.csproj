@@ -191,6 +191,14 @@
     <Compile Include="Migrations\201910221216477_PopulateMembershipTypes.Designer.cs">
       <DependentUpon>201910221216477_PopulateMembershipTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910221729472_InitialModel1.cs" />
+    <Compile Include="Migrations\201910221729472_InitialModel1.Designer.cs">
+      <DependentUpon>201910221729472_InitialModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910221752347_AddMovieTypeModel.cs" />
+    <Compile Include="Migrations\201910221752347_AddMovieTypeModel.Designer.cs">
+      <DependentUpon>201910221752347_AddMovieTypeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -198,6 +206,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
@@ -286,6 +295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910221216477_PopulateMembershipTypes.resx">
       <DependentUpon>201910221216477_PopulateMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221729472_InitialModel1.resx">
+      <DependentUpon>201910221729472_InitialModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221752347_AddMovieTypeModel.resx">
+      <DependentUpon>201910221752347_AddMovieTypeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

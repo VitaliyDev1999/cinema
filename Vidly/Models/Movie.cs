@@ -11,6 +11,16 @@ namespace Vidly.Models
 
         public string Name { get; set; }
 
-        public int Type { get; set; }
+        public MovieType MovieType { get; set; }
+
+        public string Producer { get; set; }
+
+        public short Duration { get; set; }
+
+        public string Country { get; set; }
+
+        public byte AccessAge {get;set;}
+
+        public float Rainting { get;set; }
     }
 }
