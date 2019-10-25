@@ -27,6 +27,16 @@ namespace Vidly.Controllers
             return View(movies);
         }
 
+        public ActionResult Details(int id)
+        {
+            var movie = _context.Movies.Include(c => c.MovieType).SingleOrDefault(c => c.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            return View(movie);
+        }
+
         // GET: Movies/Random
         public ActionResult Random()
         {
