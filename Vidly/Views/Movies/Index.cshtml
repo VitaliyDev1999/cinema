@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Movies</h2>
+<input type="button" class="btn btn-info" value="Add Movie" onclick="AddNewMovie()">
+<h2></h2>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -16,12 +18,17 @@
     <tbody>
         @foreach (var movie in Model)
         {
-        <tr>
-            <td>@Html.ActionLink(movie.Name, "Details", "Movies", new { id = movie.Id }, null)</td>
-            <td>@movie.Country</td>
-            <td>@movie.Rainting</td>
-            <td>@movie.MovieType.Name</td>
-        </tr>
+            <tr>
+                <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
+                <td>@movie.Country</td>
+                <td>@movie.Rainting</td>
+                <td>@movie.MovieType.Name</td>
+            </tr>
         }
     </tbody>
 </table>
+<script>
+    function AddNewMovie() {
+        window.location.href += "/new";
+    }
+</script>

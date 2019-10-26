@@ -14,6 +14,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Customers</h2>
+<input type="button" class="btn btn-info" value="Add Customer" onclick="AddNewCustomer()">
+<h2></h2>
 @if (!Model.Any())
 {
     <p>We don't have any customers yet.</p>
@@ -32,7 +34,7 @@ else
             @foreach (var customer in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+                    <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
                     <td>@customer.MembershipType.DiscountRate%</td>
                     <td>@customer.MembershipType.Name</td>
                 </tr>
@@ -40,4 +42,9 @@ else
         </tbody>
     </table>
 }
+    <script>
+        function AddNewCustomer() {
+            window.location.href += "/new";
+        }
+    </script>
 

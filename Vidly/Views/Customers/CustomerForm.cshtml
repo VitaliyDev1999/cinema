@@ -1,0 +1,39 @@
+﻿@model Vidly.ViewModels.CustomerFormViewModel
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+      <h2>@ViewBag.Title</h2>
+
+@* similar to <form> tag*@
+@*using используется чтобы вызвать на обьекте метод dispose и работает как закрывающий тэг*@
+@using (Html.BeginForm("Save", "Customers"))
+{
+    <div class="form-group">
+        @*LaberFor это тэг <lable>*@
+        @Html.LabelFor(m => m.Customer.Name)
+        @*TextBoxFor это тэг <input/>**@
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Birthdate)
+        @Html.TextBoxFor(m => m.Customer.Birthdate, "{0:d MMM yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "",
+        new { @class = "form-control" })
+    </div>
+    <div class="checkbox">
+        <br /><strong>Subscribe to Newletter?</strong><br />
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter, new { @class = "form-control" })
+
+        </label>
+    </div>
+    <br />
+    @Html.HiddenFor(m => m.Customer.Id)
+    <button type="submit" class="btn-primary">Save</button>
+}
+
