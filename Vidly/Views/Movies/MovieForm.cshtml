@@ -7,9 +7,11 @@
 <h2>@ViewBag.Title</h2>
 @using (Html.BeginForm("Save", "Movies"))
 {
+    @Html.ValidationSummary(true, "Please fill all fields")
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Name)
         @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Country)
@@ -17,15 +19,17 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Duration)
-        @Html.TextBoxFor(m => m.Movie.Duration, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Movie.Duration, new { @Value = "", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Duration)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.AccessAge)
-        @Html.TextBoxFor(m => m.Movie.AccessAge, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Movie.AccessAge, new { @Value = "6", @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Rainting)
-        @Html.TextBoxFor(m => m.Movie.Rainting, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Movie.Rainting, new { @Value = "", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Rainting)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Producer)
@@ -35,7 +39,15 @@
         @Html.LabelFor(m => m.Movie.MovieTypeId)
         @Html.DropDownListFor(m => m.Movie.MovieTypeId, new SelectList(Model.MovieTypes, "Id", "Name"), "",
         new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.MovieTypeId)
     </div>
     @Html.HiddenFor(m => m.Movie.Id)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
 }

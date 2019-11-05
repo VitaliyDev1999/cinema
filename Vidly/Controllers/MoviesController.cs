@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
+using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers
 {
@@ -57,32 +58,47 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
-            if (movie.Id == 0)
-                _context.Movies.Add(movie);
-            else
+            if (!ModelState.IsValid)
             {
-                
-                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
-                movieInDb.Name = movie.Name;
-                movieInDb.Producer = movie.Producer;
-                movieInDb.Rainting = movie.Rainting;
-                movieInDb.MovieTypeId = movie.MovieTypeId;
-                movieInDb.AccessAge = movie.AccessAge;
-                movieInDb.Country = movie.Country;
-                movieInDb.Duration = movie.Duration;
-
+                var viewModel = new MovieFromViewModel
+                {
+                    Movie = movie,
+                    MovieTypes = _context.MovieTypes.ToList()
+                };
+                return View("MovieForm",viewModel);
             }
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Movies");
-        }
+                if (movie.Id == 0)
+                    _context.Movies.Add(movie);
+                else
+                {
+
+                    var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+                    movieInDb.Name = movie.Name;
+                    movieInDb.Producer = movie.Producer;
+                    movieInDb.Rainting = movie.Rainting;
+                    movieInDb.MovieTypeId = movie.MovieTypeId;
+                    movieInDb.AccessAge = movie.AccessAge;
+                    movieInDb.Country = movie.Country;
+                    movieInDb.Duration = movie.Duration;
+
+                }
+
+
+                _context.SaveChanges();
+
+                return RedirectToAction("Index", "Movies");
+            
+            }
 
         public ActionResult New()
         {
             var movieTypes = _context.MovieTypes.ToList();
             var viewModel = new MovieFromViewModel
             {
+                Movie = new Movie(),
                 MovieTypes = movieTypes
                
             };

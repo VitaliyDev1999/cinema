@@ -215,12 +215,25 @@
     <Compile Include="Migrations\201910261630478_AddMovieTypeId.Designer.cs">
       <DependentUpon>201910261630478_AddMovieTypeId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910262019336_AddDataValidations.cs" />
+    <Compile Include="Migrations\201910262019336_AddDataValidations.Designer.cs">
+      <DependentUpon>201910262019336_AddDataValidations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910281747531_DeleteRequireAttribute.cs" />
+    <Compile Include="Migrations\201910281747531_DeleteRequireAttribute.Designer.cs">
+      <DependentUpon>201910281747531_DeleteRequireAttribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911051934450_RatingTypeChangeToDouble.cs" />
+    <Compile Include="Migrations\201911051934450_RatingTypeChangeToDouble.Designer.cs">
+      <DependentUpon>201911051934450_RatingTypeChangeToDouble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
+    <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MovieType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -334,6 +347,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910261630478_AddMovieTypeId.resx">
       <DependentUpon>201910261630478_AddMovieTypeId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910262019336_AddDataValidations.resx">
+      <DependentUpon>201910262019336_AddDataValidations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910281747531_DeleteRequireAttribute.resx">
+      <DependentUpon>201910281747531_DeleteRequireAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911051934450_RatingTypeChangeToDouble.resx">
+      <DependentUpon>201911051934450_RatingTypeChangeToDouble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
