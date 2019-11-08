@@ -66,6 +66,7 @@ namespace Vidly.Controllers.Api
             customerInDb.Name = customer.Name;
             customerInDb.MembershipTypeId = customer.MembershipTypeId;
             customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            customerInDb.Birthdate = customer.Birthdate;
 
             _context.SaveChanges();
         }
