@@ -12,118 +12,74 @@ using System.Web.Http.OData.Routing;
 using Vidly.Models;
 using Microsoft.Data.OData;
 
-namespace Vidly.Controllers.api
+namespace Vidly.Controllers.Api
 {
-    /*
-    Для класса WebApiConfig может понадобиться внесение дополнительных изменений, чтобы добавить маршрут в этот контроллер. Объедините эти инструкции в методе Register класса WebApiConfig соответствующим образом. Обратите внимание, что в URL-адресах OData учитывается регистр символов.
-
-    using System.Web.Http.OData.Builder;
-    using System.Web.Http.OData.Extensions;
-    using Vidly.Models;
-    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Customer>("Customers");
-    config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
-    */
-    public class CustomersController : ODataController
+    public class CustomersController : ApiController
     {
-        private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
+        private ApplicationDbContext _context;
 
-        // GET: odata/Customers
-        public IHttpActionResult GetCustomers(ODataQueryOptions<Customer> queryOptions)
+        public CustomersController()
         {
-            // validate the query.
-            try
-            {
-                queryOptions.Validate(_validationSettings);
-            }
-            catch (ODataException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            // return Ok<IEnumerable<Customer>>(customers);
-            return StatusCode(HttpStatusCode.NotImplemented);
+            _context = new ApplicationDbContext();
         }
 
-        // GET: odata/Customers(5)
-        public IHttpActionResult GetCustomer([FromODataUri] int key, ODataQueryOptions<Customer> queryOptions)
+        //GET /api/customers
+        public IEnumerable<Customer> GetCustomers()
         {
-            // validate the query.
-            try
-            {
-                queryOptions.Validate(_validationSettings);
-            }
-            catch (ODataException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            // return Ok<Customer>(customer);
-            return StatusCode(HttpStatusCode.NotImplemented);
+            return _context.Customers.ToList();
         }
 
-        // PUT: odata/Customers(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<Customer> delta)
+        //GET /api/customers/1
+        public Customer GetCustomer(int id)
         {
-            Validate(delta.GetEntity());
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // TODO: Get the entity here.
-
-            // delta.Put(customer);
-
-            // TODO: Save the patched entity.
-
-            // return Updated(customer);
-            return StatusCode(HttpStatusCode.NotImplemented);
+            return customer;
         }
 
-        // POST: odata/Customers
-        public IHttpActionResult Post(Customer customer)
+        //POST /api/customers
+        [HttpPost]
+        public Customer CreateCustomer(Customer customer)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (ModelState.IsValid)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            // TODO: Add create logic here.
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
 
-            // return Created(customer);
-            return StatusCode(HttpStatusCode.NotImplemented);
+            return customer;
         }
 
-        // PATCH: odata/Customers(5)
-        [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Customer> delta)
+        //PUT /api/customers/1
+        [HttpPut]
+        public void  UpdateCustomer(int id, Customer customer)
         {
-            Validate(delta.GetEntity());
+            if (ModelState.IsValid)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customerInDb == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            // TODO: Get the entity here.
+            customerInDb.Name = customer.Name;
+            customerInDb.MembershipTypeId = customer.MembershipTypeId;
+            customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
 
-            // delta.Patch(customer);
-
-            // TODO: Save the patched entity.
-
-            // return Updated(customer);
-            return StatusCode(HttpStatusCode.NotImplemented);
+            _context.SaveChanges();
         }
 
-        // DELETE: odata/Customers(5)
-        public IHttpActionResult Delete([FromODataUri] int key)
+        //DELETE /api/customers/1
+        [HttpDelete]
+        public void DeleteCustomer(int id)
         {
-            // TODO: Add delete logic here.
+            var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customerInDb == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            // return StatusCode(HttpStatusCode.NoContent);
-            return StatusCode(HttpStatusCode.NotImplemented);
+            _context.Customers.Remove(customerInDb);
+            _context.SaveChanges();
         }
     }
 }
