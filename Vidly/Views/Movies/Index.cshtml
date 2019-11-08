@@ -13,16 +13,24 @@
             <th>Country</th>
             <th>Raiting</th>
             <th>Type</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var movie in Model)
         {
             <tr>
-                <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
+                <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, new {@class = "glyphicon glyphicon-pencil"} )</td>
                 <td>@movie.Country</td>
                 <td>@movie.Rainting</td>
                 <td>@movie.MovieType.Name</td>
+                <td>
+                    @Html.ActionLink(
+                                        " ",
+                                        "Delete",
+                                        new { id = movie.Id},
+                                        new { @class = "glyphicon glyphicon-trash", onclick = "return confirm('Are you sure you want to remove "+ movie.Name +" to list ?');" })
+                            </td>
             </tr>
         }
     </tbody>

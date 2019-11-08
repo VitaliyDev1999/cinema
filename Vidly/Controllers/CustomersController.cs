@@ -102,7 +102,7 @@ namespace Vidly.Controllers
                 MembershipTypes = _context.MembershipTypes.ToList()
                 
             };
-            return View("CustomerForm",viewModel);
+            return View("CustomerForm",viewModel);  
         }
     }
 }

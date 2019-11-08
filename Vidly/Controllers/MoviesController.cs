@@ -93,6 +93,22 @@ namespace Vidly.Controllers
             
             }
 
+        public ActionResult Delete(int id)
+        {
+            var deleteMovie = _context.Movies.Single(m => m.Id == id);
+
+            if (deleteMovie == null)
+            {
+                return HttpNotFound();
+            }
+           
+
+            _context.Movies.Remove(deleteMovie);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+        }
+
         public ActionResult New()
         {
             var movieTypes = _context.MovieTypes.ToList();
